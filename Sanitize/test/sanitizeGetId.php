@@ -10,5 +10,6 @@ $clear = new Sanitize();
 $returnSaniteze         = $clear->sanitizeGetId($_GET['id']);
 $returnSanitezeDebugger = $clear->sanitizeGetId($_GET['id'], True);
 
+echo "{$returnSanitezeDebugger}<br/>";
+echo "value id: {$returnSaniteze} <br/>";
 
-echo "value: {$returnSaniteze}, Debugger: ({$returnSanitezeDebugger})";

@@ -27,16 +27,18 @@
         /**
          * @param $getId
          * @param $debbuger
-         * @return int/string 
+         * @return string 
         */
         public static function sanitizeGetId($getId, $debbuger = false)
-        {
-            
-            $id           = preg_replace("/[^0-9]/", "", $getId);
-            $idConversion = (int) $id;
-            $idInt        = filter_var($idConversion, FILTER_VALIDATE_INT);
-            
-            return ($debbuger) ?  "value: {$id}, type: ".gettype($idInt).""  : $idInt;
+        {            
+            $id           = preg_replace('/[0-9]+/', '($0)', $getId);
+            $idExplode    = explode('/', $id);
+            $idSanitize   = preg_replace('/[^0-9]/', '', $idExplode[0]);
+            $debbugerType = [
+                'value' => "{$idSanitize}",
+                'type' => gettype($idSanitize)
+            ];
+            return ($debbuger) ?  var_dump($debbugerType)  : $idSanitize;
         }
 
     }
